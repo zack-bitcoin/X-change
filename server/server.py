@@ -188,8 +188,10 @@ def user_data(dic):
         out['user']=user
         out['bitcoin']=bitcoin.getbalance(str(dic['user']), 12)
         out['bitcoin_unconfirmed']=bitcoin.getbalance(dic['user'])
-        out['litecoin']=litecoin.getbalance(str(dic['user']), 12)
-        out['litecoin_unconfirmed']=litecoin.getbalance(dic['user'])
+#        out['litecoin']=litecoin.getbalance(str(dic['user']), 12)
+#        out['litecoin_unconfirmed']=litecoin.getbalance(dic['user'])
+        out['litecoin']=0
+        out['litecoin_unconfirmed']=0
     return package(out)
 def withdraw(dic):
     user=str(dic['user'])
@@ -217,6 +219,8 @@ def buy_bid(dic):
     current_money=float(sell_coin.getbalance(user, 12))
     future_money=float(sell_coin.getbalance(user))
     bought_so_far=0.0
+    if [buy_currency, sell_currency].count('bitcoin')!=1:
+        return package({'type':'error', 'message':'you must either buy bitcoin, or sell bitcoin, every time.'})        
     if current_money>= sell_amount:
 #        sell_coin.move(user, "", sell_amount)
         available=available_bids(sell_currency, sell_amount, buy_currency, buy_amount)
