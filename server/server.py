@@ -1,5 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-import string,cgi,time, json, random, copy, cPickle, image64, os, gdbm, copy
+import string,cgi,time, json, random, copy, cPickle, image64, os, copy
 import pybitcointools as pt
 try:
     from jsonrpc import ServiceProxy
@@ -19,17 +19,29 @@ def currencies(currency):
         print('currency {} is not yet installed'.format(currency))
 
 #database junk
-def users_load(user):
-    out=gdbm.open(users_db, 'c')
-    if not out.has_key(user):
-        users_save(user, {})
+try:
+    import gdbm
+    def users_load(user):
         out=gdbm.open(users_db, 'c')
-    return json.loads(out[user])
-def users_save(user, db):
-    string=json.dumps(db)
-    out=gdbm.open(users_db, 'c')
-    out[user]=string
-    out.close()
+        if not out.has_key(user):
+            users_save(user, {})
+            out=gdbm.open(users_db, 'c')
+        return json.loads(out[user])
+    def users_save(user, db):
+        string=json.dumps(db)
+        out=gdbm.open(users_db, 'c')
+        out[user]=string
+        out.close()
+except:
+    def users_load(user):
+        out=cPickle.load(open(users_db, 'rb'))
+        return json.loads(out[user])
+    def users_save(user, db):
+        string=json.dumps(db)
+        out=cPickle.load(open(users_db, 'rb'))
+        out[user]=string
+        cPickle.dump(out, open(users_db, 'wb'))
+
 #currencies('bitcoin').move('', '04337ae95e50f7a0e73229c2e65193f50d46506fb074b185fdae6bf1f2b47c6489b1ed8455838eb9cc14ecbfc8902f63376a672daff64da145f2b40d51ebaab2ca', 0.0002)
 def fs_load(database):
     try:

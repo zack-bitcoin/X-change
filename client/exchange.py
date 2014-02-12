@@ -1,5 +1,5 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
-import string,cgi,time, json, random, copy, cPickle, image64, os, gdbm, pprint
+import string,cgi,time, json, random, copy, cPickle, image64, os, pprint
 import pybitcointools as pt
 import urllib
 PORT=8090
