@@ -5,7 +5,7 @@ python2
 https://github.com/vbuterin/pybitcointools
 bitcoind
 litecoind
-http://json-rpc.org/wiki/python-json-rpc
+https://github.com/jgarzik/python-bitcoinrpc
 
 To run this program, put this in a terminal:
 python server.py

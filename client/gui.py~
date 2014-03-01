@@ -67,17 +67,12 @@ def info(dic):
 <input type="text" name="to_address" value="to address">\
 <input type="text" name="amount" value="amount">\
 '))
-    out=out.format('litecoin deposit address: '+str(exchange.deposit_address(user, privkey, 'litecoin')['deposit_address'])+'<br>{}')
+    out=out.format('litecoin deposit address: '+str(exchange.deposit_address(user, privkey, 'litecoin'))+'<br>{}')#['deposit_address'])+'<br>{}')
     if a['litecoin'] != a['litecoin_unconfirmed']:
         string=str(a['litecoin'])+'/'+str(a['litecoin_unconfirmed'])
     else:
         string=str(a['litecoin'])
-    try:
-        out=out.format('litecoin balance: '+string+'<br>{}')
-    except:
-        print('string: ' +str(string))
-        print('out: '+str(out))
-        error('here')
+    out=out.format('litecoin balance: '+string+'<br>{}')
     if a['litecoin']>0:
         out=out.format(easyForm('/info', 'buy bitcoin', '\
 <input type="hidden" name="privkey" value="'+privkey+'">\

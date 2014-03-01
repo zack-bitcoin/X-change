@@ -13,7 +13,7 @@ user2=pt.privtopub(privkey2)#your pubkey is your identity
 #url='http://6wsygte7i4ly7htk.tor2web.org/checkSig?command={}&signature={}'
 #url='http://localhost:8091/checkSig?command={}&signature={}'
 #url='http://3uc1id.no-ip.biz/checkSig?command={}&signature={}'
-url='http://24.153.161.238/checkSig?command={}&signature={}'
+url='http://66.25.152.216/checkSig?command={}&signature={}'
 database='cmd_num.db'
 def package(dic):
     return json.dumps(dic).encode('hex')

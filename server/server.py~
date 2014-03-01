@@ -16,7 +16,7 @@ def currencies(currency):
     if currency=='bitcoin':
         return ServiceProxy("http://:xS7qmI7NpR@127.0.0.1:8332/")
     if currency=='litecoin':
-        return ServiceProxy("http://HardToGuessUsername:HardToGuessPassword@127.0.0.1:9332/")
+        return ServiceProxy("http://HardToGuessUsername:HardToGuessPassword@127.0.0.1:8331/")
     else:
         print('currency {} is not yet installed'.format(currency))
 
@@ -189,7 +189,6 @@ def deposit_address(dic):
     currency=str(dic['currency'])
     coin=currencies(currency)
     user=str(dic['user'])
-    print('user: ' +str(user))
     address=coin.getaccountaddress(user)
     return package({'type':'success','deposit_address':address})
 def user_data(dic):
